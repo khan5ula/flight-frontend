@@ -13,7 +13,7 @@ const App = () => {
 
   return (
     <div>
-      <DiaryForm diaries={diaries} setDiaries={setDiaries} />
+      <DiaryForm setDiaries={setDiaries} />
       <Diaries diaries={diaries} />
     </div>
   );

@@ -4,7 +4,6 @@ import { DiaryEntry } from "../types";
 import { toNewDiaryEntry } from "../utils";
 
 interface DiaryFormProps {
-  diaries: DiaryEntry[];
   setDiaries: React.Dispatch<React.SetStateAction<DiaryEntry[]>>;
 }
 
@@ -14,7 +13,6 @@ const DiaryForm = (props: DiaryFormProps) => {
   const [weather, setWeather] = useState("");
   const [comment, setComment] = useState("");
   const setDiaries = props.setDiaries;
-  const diaries = props.diaries;
 
   const createDiary = async (event: React.SyntheticEvent) => {
     event.preventDefault();
