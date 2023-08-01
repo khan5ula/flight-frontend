@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
-import { DiaryEntry } from "../types";
-import DiaryService from "../services/diaries";
 import Diary from "./Diary";
+import { DiaryEntry } from "../types";
 
-const Diaries = () => {
-  const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
+interface DiariesProps {
+  diaries: DiaryEntry[];
+}
 
-  useEffect(() => {
-    DiaryService.getAll().then((response) => setDiaries(response));
-  }, []);
+const Diaries = (props: DiariesProps) => {
+  const diaries = props.diaries.sort((a, b) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const dateA: any = new Date(a.date);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const dateB: any = new Date(b.date);
+
+    return dateB - dateA;
+  });
 
   return (
     <div>
