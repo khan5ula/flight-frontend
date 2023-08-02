@@ -9,8 +9,6 @@ const Notification = (props: NotificationProps) => {
     return null;
   }
 
-  console.log(message);
-
   return <div style={{ color: "red" }}>{message}</div>;
 };
 

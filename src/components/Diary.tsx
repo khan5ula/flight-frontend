@@ -8,7 +8,6 @@ const Diary = (props: DiaryProps) => {
   const diary = props.diary;
   return (
     <div>
-      <hr />
       <h3>{diary.date}</h3>
       <table>
         <tbody>
@@ -26,6 +25,7 @@ const Diary = (props: DiaryProps) => {
           </tr>
         </tbody>
       </table>
+      <hr />
     </div>
   );
 };

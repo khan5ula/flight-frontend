@@ -21,7 +21,6 @@ const Diaries = (props: DiariesProps) => {
       {diaries.map((diary, index) => (
         <div key={index}>
           <Diary diary={diary} />
-          <br />
         </div>
       ))}
     </div>
