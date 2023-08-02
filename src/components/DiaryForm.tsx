@@ -2,9 +2,11 @@ import { useState } from "react";
 import DiaryService from "../services/diaries";
 import { DiaryEntry } from "../types";
 import { toNewDiaryEntry } from "../utils";
+import axios from "axios";
 
 interface DiaryFormProps {
   setDiaries: React.Dispatch<React.SetStateAction<DiaryEntry[]>>;
+  setMessage: (message: string) => void;
 }
 
 const DiaryForm = (props: DiaryFormProps) => {
@@ -13,6 +15,7 @@ const DiaryForm = (props: DiaryFormProps) => {
   const [weather, setWeather] = useState("");
   const [comment, setComment] = useState("");
   const setDiaries = props.setDiaries;
+  const setMessage = props.setMessage;
 
   const createDiary = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -25,8 +28,19 @@ const DiaryForm = (props: DiaryFormProps) => {
       id: 1,
     };
 
-    const result = await DiaryService.create(toNewDiaryEntry(diary));
-    setDiaries((diaries) => diaries.concat(result));
+    try {
+      const result = await DiaryService.create(toNewDiaryEntry(diary));
+      setDiaries((diaries) => diaries.concat(result));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(error.status);
+        console.error(error.response);
+        const errorMessage = error.response?.data.replace(/'/g, "");
+        setMessage(errorMessage);
+      } else {
+        console.error(error);
+      }
+    }
 
     setDate("");
     setVisibility("");
